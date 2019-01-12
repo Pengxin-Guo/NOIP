@@ -11,33 +11,20 @@
 #include <iostream>
 using namespace std;
 #define MAX_N 100
+#define mAX_T 10000
 
 int v[MAX_N + 5] = {0};
 int w[MAX_N + 5] = {0};
 int s[MAX_N + 5] = {0};
-int dp[MAX_N + 5][MAX_N + 5] = {0};
-
-int get_init(int total, int w, int v, int s) {
-    int ans = 0;
-    while (total >= w && s > 0) {
-        total -= w;
-        ans += v;
-        s -= 1;
-    }
-    return ans;
-}
+int dp[MAX_N + 5][mAX_T + 5] = {0};
 
 int main() {
     int n, total;
-    cin >> n;
+    cin >> total >> n;
     for (int i = 1; i <= n; i++) {
         cin >> w[i] >> v[i] >> s[i];
     }
-    cin >> total;
-    for (int j = 0; j <= total; j++) {
-        if (j >= w[1]) dp[1][j] = get_init(j, w[1], v[1], s[1]);
-    }
-    for (int i = 2; i <= n; i++) {
+    for (int i = 1; i <= n; i++) {
         for (int j = 0; j <= total; j++) {
             dp[i][j] = dp[i - 1][j];
             for (int k = 1; k <= s[i]; k++) {
@@ -47,12 +34,14 @@ int main() {
             }
         }
     }
+    /*
     for (int i = 1; i <= n; i++) {
         for (int j = 0; j <= total; j++) {
             cout << dp[i][j] << " ";
         }
         cout << endl;
     }
+    */
     cout << dp[n][total] << endl;
     return 0;
 }

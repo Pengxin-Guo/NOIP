@@ -22,7 +22,7 @@ dp(i, j) = min { dp(i, k) + dp(k + 1, j) + 1    |   k c [i, j)
 #include <iostream>
 #include <cstring>
 using namespace std;
-#define MAX_N 100
+#define MAX_N 5000
 
 int dp[MAX_N + 5][MAX_N + 5] = {0};                  // dp[i][j]代表从第i位到第j位最少切多少刀
 

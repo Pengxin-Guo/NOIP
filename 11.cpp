@@ -9,7 +9,7 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-#define MAX_N 100
+#define MAX_N 1000
 
 int dp[MAX_N + 5][MAX_N + 5] = {0};
 
