@@ -8,7 +8,7 @@
 
 #include <iostream>
 using namespace std;
-#define MAX_N 100
+#define MAX_N 500000
 
 int value[MAX_N + 5] = {0};
 int dp[MAX_N + 5] = {0};
