@@ -13,6 +13,7 @@ using namespace std;
 #define MAX_B 1000
 
 int f[MAX_N + 5][MAX_K + 5][MAX_K + 5][MAX_B + 5] = {0};
+// f[n][i][j]代表前n块墙壁, 第一块涂第i中颜色, 第n块涂第j种颜色的方法种数
 
 int main() {
     int n, k;
