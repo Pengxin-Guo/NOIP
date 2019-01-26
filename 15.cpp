@@ -11,12 +11,12 @@
 #include <iostream>
 using namespace std;
 #define MAX_N 100
-#define mAX_T 10000
+#define MAX_T 10000
 
 int v[MAX_N + 5] = {0};
 int w[MAX_N + 5] = {0};
 int s[MAX_N + 5] = {0};
-int dp[MAX_N + 5][mAX_T + 5] = {0};
+int dp[MAX_N + 5][MAX_T + 5] = {0};
 
 int main() {
     int n, total;
