@@ -2,44 +2,55 @@
 	> File Name: 8.cpp
 	> Author: gpx
 	> Mail: 1457495424@qq.com
-	> Created Time: 2019年01月10日 星期四 11时41分33秒
+	> Created Time: 2019年01月11日 星期五 10时49分44秒
  ************************************************************************/
-// 数字三角形
+// 切割回文
 
 /*
-动态规划类问题
+区间dp问题
 
-1.确定动归状态  
-    f(i, j)代表从底边走到(i, j)点所能获得的最大值
-2.确定状态转移方程 
-    f(i, j) = max { f(i + 1, j)     } + val(i, j)
-                  { f(i + 1, j + 1) }
-3.正确性证明
-    借助于数学归纳法
-4.程序实现
+1.确定动归状态
+dp(i, j) 代表从第i位到第j位最少切多少刀
+
+2.确定状态转移方程
+dp(i, j) = min { dp(i, k) + dp(k + 1, j) + 1    |   k c [i, j)
+               { 0                              |   str[i] = str[j] 且 dp(i + 1, j - 1) = 0
+3.分析转移方式
 
 */
 
 #include <iostream>
+#include <cstring>
 using namespace std;
-#define MAX_N 1000
-int val[MAX_N + 5][MAX_N + 5] = {0};
-int dp[MAX_N + 5][MAX_N + 5] = {0};
+#define MAX_N 5000
+
+int dp[MAX_N + 5][MAX_N + 5] = {0};                  // dp[i][j]代表从第i位到第j位最少切多少刀
 
 int main() {
-    int n;
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j <= i; j++) {
-            cin >> val[i][j];
+    char str[MAX_N + 5] = {0};
+    cin >> str;
+    int len = strlen(str);
+    for (int i = len - 1; i >= 0; i--) {
+        for (int j = i + 1; j < len; j++) {
+            if (str[i] == str[j] && dp[i + 1][j - 1] == 0) {
+                dp[i][j] = 0;
+                continue;
+            }
+            dp[i][j] = dp[i][i] + dp[i + 1][j] + 1;
+            for (int k = i + 1; k < j; k++) {
+                int temp = dp[i][k] + dp[k + 1][j] + 1;
+                if (dp[i][j] > temp) dp[i][j] = temp;
+            }
         }
     }
-    for (int i = 0; i < n; i++) dp[n - 1][i] = val[n - 1][i];
-    for (int i = n - 2; i >= 0; i--) {
-        for (int j = 0; j <= i; j++) {
-            dp[i][j] = max(dp[i + 1][j], dp[i + 1][j + 1]) + val[i][j];
+    /*
+    for (int i = 0; i < len; i++) {
+        for (int j = i; j < len; j++) {
+            cout << dp[i][j] << " ";
         }
+        cout << endl;
     }
-    cout << dp[0][0] << endl;
+    */
+    cout << dp[0][len - 1] << endl;
     return 0;
 }

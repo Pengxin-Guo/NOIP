@@ -2,35 +2,46 @@
 	> File Name: 11.cpp
 	> Author: gpx
 	> Mail: 1457495424@qq.com
-	> Created Time: 2019年01月11日 星期五 10时24分17秒
+	> Created Time: 2019年01月11日 星期五 16时02分16秒
  ************************************************************************/
-// 最长公共子序列
+// 多重背包
+// 第一种简单的做法, 就是将其退化为简单的0/1背包来做
+// 第二种做法就是下面程序实现的做法
 
 #include <iostream>
-#include <cstring>
 using namespace std;
-#define MAX_N 1000
+#define MAX_N 100
+#define MAX_T 10000
 
-int dp[MAX_N + 5][MAX_N + 5] = {0};
+int v[MAX_N + 5] = {0};
+int w[MAX_N + 5] = {0};
+int s[MAX_N + 5] = {0};
+int dp[MAX_N + 5][MAX_T + 5] = {0};
 
 int main() {
-    char stra[MAX_N + 5], strb[MAX_N + 5];
-    cin >> stra >> strb;
-    int lena = strlen(stra), lenb = strlen(strb);
-    for (int i = 0; i < lena; i++) {
-        dp[i][0] = 0;
+    int n, total;
+    cin >> total >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> w[i] >> v[i] >> s[i];
     }
-    for (int i = 0; i < lenb; i++) {
-        dp[0][i] = 0;
-    }
-    int ans = dp[0][0];
-    for (int i = 1; i <= lena; i++) {
-        for (int j = 1; j <= lenb; j++) {
-            if (stra[i - 1] == strb[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1;
-            else dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
-            if (ans < dp[i][j]) ans = dp[i][j];
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j <= total; j++) {
+            dp[i][j] = dp[i - 1][j];
+            for (int k = 1; k <= s[i]; k++) {
+                if (j - k * w[i] < 0) break;
+                int temp = dp[i - 1][j - k * w[i]] + k * v[i];
+                if (temp > dp[i][j]) dp[i][j] = temp;
+            }
         }
     }
-    cout << ans << endl;
+    /*
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j <= total; j++) {
+            cout << dp[i][j] << " ";
+        }
+        cout << endl;
+    }
+    */
+    cout << dp[n][total] << endl;
     return 0;
 }
