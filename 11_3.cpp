@@ -14,16 +14,16 @@ using namespace std;
 int dp[MAX_N + 5][MAX_V + 5] = {0};
 int v[MAX_N + 5], w[MAX_N + 5], s[MAX_N + 5];
 struct Data {
-    int val, j;
-} q[MAX_V + 5];
+    int val, j; // val代表价值, j代表当前单调队列这个元素的重量值
+} q[MAX_V + 5]; // 单调队列用来维护这个区间的最大值
 int head, tail;
 int n, V;
 
 int main() {
     cin >> V >> n;
     for (int i = 1; i <= n; i++) cin >> w[i] >> v[i] >> s[i];
-    for (int i = 1; i <= n; i++) {
-        for (int r = 0; r < w[i]; r++) {
+    for (int i = 1; i <= n; i++) { // 处理每种物品
+        for (int r = 0; r < w[i]; r++) { // 按照余数系来处理
             head = 0, tail = 0;
             q[tail++] = {dp[i - 1][r], r};
             dp[i][r] = dp[i - 1][r];
