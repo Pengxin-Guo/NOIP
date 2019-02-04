@@ -4,7 +4,17 @@
 	> Mail: 1457495424@qq.com
 	> Created Time: Sun Feb  3 20:34:22 2019
  ************************************************************************/
-// 古老的打印机
+// 古老的打印机(斜率优化)
+/*
+ dp[i]代表打印到第i个字符的最小消耗
+ 
+ dp[i] = min(dp[j] + (sum[i] - sum[j]) * (sum[i] - sum[j]) + M)  | j c [0, i - 1]
+ 这里的sum数组代表前缀和
+
+ f[i] = dp[i] + sum[i] * sum[i]
+
+ 用单调队列去维护所有有可能是答案的点
+*/
 
 #include <iostream>
 using namespace std;
