@@ -17,12 +17,14 @@ int main() {
     char stra[MAX_N + 5], strb[MAX_N + 5];
     cin >> stra >> strb;
     int lena = strlen(stra), lenb = strlen(strb);
+    /*
     for (int i = 0; i < lena; i++) {
         dp[i][0] = 0;
     }
     for (int i = 0; i < lenb; i++) {
         dp[0][i] = 0;
     }
+    */
     int ans = dp[0][0];
     for (int i = 1; i <= lena; i++) {
         for (int j = 1; j <= lenb; j++) {
