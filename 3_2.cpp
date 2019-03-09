@@ -13,7 +13,7 @@ using namespace std;
 #define MAX_B 1000
 
 int dp[MAX_N + 5][MAX_K + 5][MAX_B + 5] = {0};
-// dp[n][i]代表第一块墙壁涂第0中颜色, 第n块墙壁涂第i种颜色的方法种数
+// dp[n][i]代表第一块墙壁涂第0种颜色, 第n块墙壁涂第i种颜色的方法种数
 // 最后答案是 k * (dp[n][1] + dp[n][2] + ... dp[n][k - 1])
 
 void my_add(int *ans, int *num1, int *num2) {
